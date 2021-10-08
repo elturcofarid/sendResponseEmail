@@ -24,13 +24,15 @@ public class EmailReceiver {
 			ResponsePosmark email = gson.fromJson(in, ResponsePosmark.class);
 
 			Data data = gson.fromJson(gson.toJson(email.getData()), Data.class);
+
+			System.out.println("si pasa por aqui");
 			if (data != null && data.getUrlDestino() != null)
 			sendResponse(email, data.getUrlDestino());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("finaliza bien");
 	}
 
 
@@ -47,10 +49,13 @@ public class EmailReceiver {
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
+
+			System.out.println("si pasa por aqui servicio");
+
 			ResponseEntity<String> responseEntity = restTemplate.exchange(
 					url, HttpMethod.POST, entity,
 					String.class);
-
+System.out.println(responseEntity);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
